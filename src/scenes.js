@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { config } from "./config";
+import { Enemy } from "./enemy";
 import { Player } from "./player";
 
 export class BootScene extends Phaser.Scene {
@@ -28,6 +29,7 @@ export class PreloadScene extends Phaser.Scene {
   }
   preload() {
     this.load.atlas("dragon", "./assets/dragon.png", "./assets/dragon.json");
+    this.load.atlas("enemy", "./assets/enemy.png", "./assets/enemy.json");
   }
   create() {
     this.scene.start("Start");
@@ -83,11 +85,13 @@ export class GameScene extends Phaser.Scene {
   create() {
     this.createBackgrond();
     this.player = new Player(this);
+    this.enemy = new Enemy(this);
   }
 
   update() {
     this.bg.tilePositionX += 0.5;
     this.player.move();
+    this.enemy.move();
   }
 
   /**
