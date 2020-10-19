@@ -25,7 +25,9 @@ export class PreloadScene extends Phaser.Scene {
   constructor() {
     super("Preload");
   }
-  preload() {}
+  preload() {
+    this.load.atlas("dragon", "./assets/dragon.png", "./assets/dragon.json");
+  }
   create() {
     this.scene.start("Start");
   }
@@ -73,8 +75,10 @@ export class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
   }
+
   create() {
     this.createBackgrond();
+    this.add.sprite(150, config.height / 2, "dragon", "dragon1");
   }
 
   /**
