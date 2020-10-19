@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { config } from "./config";
+import { Player } from "./player";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -75,10 +76,17 @@ export class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
   }
+  init() {
+    this.cursors = this.input.keyboard.createCursorKeys();
+  }
 
   create() {
     this.createBackgrond();
-    this.add.sprite(150, config.height / 2, "dragon", "dragon1");
+    this.player = new Player(this);
+  }
+
+  update() {
+    this.player.move();
   }
 
   /**
