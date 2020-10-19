@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { config } from "./config";
-import { Enemy } from "./enemy";
+import { Enemies } from "./enemies";
 import { Player } from "./player";
 
 export class BootScene extends Phaser.Scene {
@@ -85,13 +85,14 @@ export class GameScene extends Phaser.Scene {
   create() {
     this.createBackgrond();
     this.player = new Player(this);
-    this.enemy = new Enemy(this);
+    this.enemies = new Enemies(this);
+    this.enemies.createEnemy();
+    this.enemies.createEnemy();
   }
 
   update() {
     this.bg.tilePositionX += 0.5;
     this.player.move();
-    this.enemy.move();
   }
 
   /**
