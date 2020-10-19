@@ -86,6 +86,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   update() {
+    this.bg.tilePositionX += 0.5;
     this.player.move();
   }
 
@@ -93,6 +94,8 @@ export class GameScene extends Phaser.Scene {
    * Background image
    */
   createBackgrond() {
-    this.add.sprite(0, 0, "background").setOrigin(0, 0);
+    this.bg = this.add
+      .tileSprite(0, 0, config.width, config.height, "background")
+      .setOrigin(0, 0);
   }
 }
