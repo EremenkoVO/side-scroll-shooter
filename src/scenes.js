@@ -86,8 +86,6 @@ export class GameScene extends Phaser.Scene {
     this.createBackgrond();
     this.player = new Player(this);
     this.enemies = new Enemies(this);
-    this.enemies.createEnemy();
-    this.enemies.createEnemy();
   }
 
   update() {
