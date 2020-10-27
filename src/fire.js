@@ -23,6 +23,23 @@ export class Fire extends Phaser.GameObjects.Sprite {
     this.velocity = data.velocity;
   }
 
+  reset() {
+    this.x = source.x + source.width / 2;
+    this.y = data.y;
+    this.setAlive(true);
+  }
+
+  setAlive(status) {
+    // deactived
+    this.body.enable = status;
+
+    // hide texture
+    this.setVisible = status;
+
+    //deactived object
+    this.setActive(status);
+  }
+
   move() {
     this.body.setVelocityX(this.velocity);
   }
