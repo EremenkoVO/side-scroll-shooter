@@ -18,6 +18,24 @@ export class Player extends Enemy {
       },
       origin: { x: 1, y: 0.5 },
     });
+
+    //frames
+    const frames = this.scene.anims.generateFrameNames("dragon", {
+      prefix: "dragon",
+      start: 1,
+      end: 6,
+    });
+
+    //animation
+    this.scene.anims.create({
+      key: "fly",
+      frames,
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    //
+    this.play("fly");
   }
 
   /**

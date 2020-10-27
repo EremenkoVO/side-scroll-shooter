@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { Boom } from "./boom";
 import { config } from "./config";
 import { Enemies } from "./enemies";
 import { Player } from "./player";
@@ -11,7 +12,7 @@ export class BootScene extends Phaser.Scene {
    * Preload all assets
    */
   preload() {
-    // image //
+    // images //
     this.load.image("background", "./assets/background.png");
   }
 
@@ -28,8 +29,10 @@ export class PreloadScene extends Phaser.Scene {
     super("Preload");
   }
   preload() {
+    // images //
     this.load.atlas("dragon", "./assets/dragon.png", "./assets/dragon.json");
     this.load.atlas("enemy", "./assets/enemy.png", "./assets/enemy.json");
+    this.load.atlas("boom", "./assets/boom.png", "./assets/boom.json");
     this.load.image("fire", "./assets/fire.png");
     this.load.image("bullet", "./assets/bullet.png");
   }
@@ -156,9 +159,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   onOverlap(source, target) {
-    if (source !== this.player && target !== this.player) {
+    const enemy = [source, target].find((item) => item.texture.key === "enemy");
+    if (enemy) {
       ++this.score;
       this.scoreText.setText(`Score: ${this.score}`);
+      Boom.generate(this, enemy.x, enemy.y);
     }
     source.setAlive(false);
     target.setAlive(false);
