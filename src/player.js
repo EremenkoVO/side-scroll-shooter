@@ -1,19 +1,22 @@
 import Phaser from "phaser";
 import { config } from "./config";
 import { Fires } from "./fires";
+import { Enemy } from "./enemy";
 
-export class Player extends Phaser.GameObjects.Sprite {
+export class Player extends Enemy {
   constructor(scene) {
-    super(scene, 150, config.height / 2, "dragon", "dragon1");
-    this.init();
-    this.move();
+    super({
+      scene,
+      x: 150,
+      y: config.height / 2,
+      texture: "dragon",
+      frame: "dragon1",
+      velocity: 500,
+    });
   }
 
-  init() {
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.enable = true;
-    this.velocity = 500;
+  init(data) {
+    super.init(data);
 
     this.fires = new Fires(this.scene);
     this.timer = this.scene.time.addEvent({

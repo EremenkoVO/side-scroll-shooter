@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import { Fire } from "./fire";
-import { config } from "./config";
 
 export class Fires extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
@@ -14,7 +13,7 @@ export class Fires extends Phaser.Physics.Arcade.Group {
       fire = Fire.generate(this.scene, source);
       this.add(fire);
     } else {
-      fire.reset(source);
+      fire.reset(source.x + source.width / 2, source.y);
     }
 
     fire.move();

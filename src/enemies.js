@@ -4,9 +4,12 @@ import { Enemy } from "./enemy";
 export class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super();
+
     this.scene = scene;
+
     this.countMax = 5;
     this.countCreated = 0;
+
     this.timer = this.scene.time.addEvent({
       delay: 1000,
       loop: true,
