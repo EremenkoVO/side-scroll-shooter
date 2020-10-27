@@ -26,10 +26,14 @@ export class MovableObject extends Phaser.GameObjects.Sprite {
     this.body.enable = status;
 
     // hide texture
-    this.setVisible = status;
+    this.setVisible(status);
 
     //deactived object
     this.setActive(status);
+
+    if (this.timer) {
+      this.timer.paused = !status;
+    }
   }
 
   isDead() {
