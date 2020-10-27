@@ -42,12 +42,34 @@ export class StartScene extends Phaser.Scene {
   constructor() {
     super("Start");
   }
-
-  preload() {}
-  create() {
+  create(data) {
     this.createBackgrond();
+    if (data.score != undefined) {
+      this.createStats(data);
+    }
     this.createText();
     this.setEvents();
+  }
+
+  createStats(data) {
+    this.add
+      .graphics()
+      .fillStyle(0x000000, 0.5)
+      .fillRoundedRect(
+        config.width / 2 - 200,
+        config.height / 2 - 200,
+        400,
+        400,
+      );
+
+    const textTitle = data.completed ? "Level completed!" : "Game Over";
+    const textScore = `Score: ${data.score}`;
+    const textStyle = {
+      font: "40px CurseCasual",
+      fill: "#FFFFFF",
+    };
+    this.add.text(config.width / 2, 250, textTitle, textStyle).setOrigin(0.5);
+    this.add.text(config.width / 2, 350, textScore, textStyle).setOrigin(0.5);
   }
 
   /**
@@ -61,10 +83,12 @@ export class StartScene extends Phaser.Scene {
    * Create started text
    */
   createText() {
-    this.add.text(config.width / 2, 500, "Tap to start", {
-      font: "40px CurseCasual",
-      fill: "#FFFFFF",
-    });
+    this.add
+      .text(config.width / 2, 500, "Tap to start", {
+        font: "40px CurseCasual",
+        fill: "#FFFFFF",
+      })
+      .setOrigin(0.5);
   }
 
   /**
@@ -83,6 +107,7 @@ export class GameScene extends Phaser.Scene {
   }
   init() {
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.score = 0;
   }
 
   create() {
@@ -91,6 +116,17 @@ export class GameScene extends Phaser.Scene {
     this.enemies = new Enemies(this);
     this.createCompliteEvents();
     this.addOverlap();
+    this.createText();
+  }
+
+  /**
+   * Create started text
+   */
+  createText() {
+    this.scoreText = this.add.text(50, 50, "Score: 0", {
+      font: "40px CurseCasual",
+      fill: "#FFFFFF",
+    });
   }
 
   addOverlap() {
@@ -120,6 +156,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   onOverlap(source, target) {
+    if (source !== this.player && target !== this.player) {
+      ++this.score;
+      this.scoreText.setText(`Score: ${this.score}`);
+    }
     source.setAlive(false);
     target.setAlive(false);
   }
@@ -135,7 +175,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   onComplete() {
-    this.scene.start("Start");
+    this.scene.start("Start", {
+      score: this.score,
+      completed: this.player.active,
+    });
   }
 
   /**
