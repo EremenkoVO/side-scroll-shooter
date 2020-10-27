@@ -31,6 +31,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.atlas("dragon", "./assets/dragon.png", "./assets/dragon.json");
     this.load.atlas("enemy", "./assets/enemy.png", "./assets/enemy.json");
     this.load.image("fire", "./assets/fire.png");
+    this.load.image("bullet", "./assets/bullet.png");
   }
   create() {
     this.scene.start("Start");

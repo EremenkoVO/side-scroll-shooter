@@ -8,7 +8,6 @@ export class MovableObject extends Phaser.GameObjects.Sprite {
   }
 
   init(data) {
-    console.log(data);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.enable = true;

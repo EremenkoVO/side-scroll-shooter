@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import { config } from "./config";
-import { Fires } from "./fires";
 import { Enemy } from "./enemy";
 
 export class Player extends Enemy {
@@ -12,23 +11,13 @@ export class Player extends Enemy {
       texture: "dragon",
       frame: "dragon1",
       velocity: 500,
+      bullet: {
+        delay: 500,
+        texture: "fire",
+        velocity: 750,
+      },
+      origin: { x: 1, y: 0.5 },
     });
-  }
-
-  init(data) {
-    super.init(data);
-
-    this.fires = new Fires(this.scene);
-    this.timer = this.scene.time.addEvent({
-      delay: 500,
-      loop: true,
-      callback: this.fire,
-      callbackScope: this,
-    });
-  }
-
-  fire() {
-    this.fires.createdFire(this);
   }
 
   /**

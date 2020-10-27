@@ -1,8 +1,28 @@
 import Phaser from "phaser";
 import { MovableObject } from "./movableobject";
+import { Fires } from "./fires";
 import { config } from "./config";
 
 export class Enemy extends MovableObject {
+  init(data) {
+    super.init(data);
+
+    this.fires = new Fires(this.scene);
+    this.timer = this.scene.time.addEvent({
+      delay: data.bullet.delay,
+      loop: true,
+      callback: this.fire,
+      callbackScope: this,
+    });
+
+    this.bullet = data.bullet;
+    this.setOrigin(data.origin.x, data.origin.y);
+  }
+
+  fire() {
+    this.fires.createdFire(this);
+  }
+
   static generateAttributes() {
     const x = config.width + 200;
     const y = Phaser.Math.Between(100, config.height - 100);
@@ -17,7 +37,13 @@ export class Enemy extends MovableObject {
       y: data.y,
       texture: "enemy",
       frame: data.frame,
-      velocity: -500,
+      velocity: -250,
+      bullet: {
+        delay: 1000,
+        texture: "bullet",
+        velocity: -500,
+      },
+      origin: { x: 0, y: 0.5 },
     });
   }
 
