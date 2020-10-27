@@ -13,11 +13,11 @@
 Установка приложения
 
 ```sh
-npm install
+yarn install
 ```
 
 Запуск приложения
 
 ```sh
-npm run dev
+yarn dev
 ```
