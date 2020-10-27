@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export class Boom extends Phaser.GameObjects.Sprite {
+class Boom extends Phaser.GameObjects.Sprite {
   static generate(scene, x, y) {
     return new Boom({ scene, x, y });
   }
@@ -31,3 +31,5 @@ export class Boom extends Phaser.GameObjects.Sprite {
     });
   }
 }
+
+export default Boom;

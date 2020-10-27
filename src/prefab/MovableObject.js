@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import { config } from "./config";
+import config from "./../config";
 
-export class MovableObject extends Phaser.GameObjects.Sprite {
+class MovableObject extends Phaser.GameObjects.Sprite {
   constructor(data) {
     super(data.scene, data.x, data.y, data.texture, data.frame);
     this.init(data);
@@ -54,3 +54,5 @@ export class MovableObject extends Phaser.GameObjects.Sprite {
     this.body.setVelocityX(this.velocity);
   }
 }
+
+export default MovableObject;

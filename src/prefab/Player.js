@@ -1,8 +1,8 @@
 import Phaser from "phaser";
-import { config } from "./config";
-import { Enemy } from "./enemy";
+import config from "./../config";
+import Enemy from "./../prefab/Enemy";
 
-export class Player extends Enemy {
+class Player extends Enemy {
   constructor(scene) {
     super({
       scene,
@@ -57,3 +57,5 @@ export class Player extends Enemy {
     }
   }
 }
+
+export default Player;

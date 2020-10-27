@@ -1,11 +1,15 @@
 import Phaser from "phaser";
-import { Fire } from "./fire";
+import Fire from "./../prefab/Fire";
 
-export class Fires extends Phaser.Physics.Arcade.Group {
+class Fires extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super(scene.physics.world, scene);
   }
-
+  /**
+   * Created fire
+   *
+   * @param {*} source
+   */
   createdFire(source) {
     let fire = this.getFirstDead();
 
@@ -19,3 +23,5 @@ export class Fires extends Phaser.Physics.Arcade.Group {
     fire.move();
   }
 }
+
+export default Fires;

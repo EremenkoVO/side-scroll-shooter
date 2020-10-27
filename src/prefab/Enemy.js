@@ -1,9 +1,9 @@
 import Phaser from "phaser";
-import { MovableObject } from "./movableobject";
-import { Fires } from "./fires";
-import { config } from "./config";
+import config from "./../config";
+import MovableObject from "./../prefab/MovableObject";
+import Fires from "./../prefab/Fires";
 
-export class Enemy extends MovableObject {
+class Enemy extends MovableObject {
   init(data) {
     super.init(data);
     this.timer = this.scene.time.addEvent({
@@ -17,16 +17,26 @@ export class Enemy extends MovableObject {
     this.setOrigin(data.origin.x, data.origin.y);
   }
 
+  //
   fire() {
     this.fires.createdFire(this);
   }
 
+  /**
+   * generate enemy attributes
+   */
   static generateAttributes() {
     const x = config.width + 200;
     const y = Phaser.Math.Between(100, config.height - 100);
     return { x, y, frame: `enemy${Phaser.Math.Between(1, 4)}` };
   }
 
+  /**
+   * generate enemy
+   *
+   * @param {*} scene
+   * @param {*} fires
+   */
   static generate(scene, fires) {
     const data = Enemy.generateAttributes();
     return new Enemy({
@@ -46,13 +56,21 @@ export class Enemy extends MovableObject {
     });
   }
 
+  /**
+   * reset enemy
+   */
   reset() {
     const data = Enemy.generateAttributes();
     super.reset(data.x, data.y);
     this.setFrame(data.frame);
   }
 
+  /**
+   * if the enemy is off-screen
+   */
   isDead() {
     return this.x < -this.width;
   }
 }
+
+export default Enemy;

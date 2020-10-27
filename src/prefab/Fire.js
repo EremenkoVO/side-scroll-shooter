@@ -1,8 +1,8 @@
 import Phaser from "phaser";
-import { MovableObject } from "./movableobject";
-import { config } from "./config";
+import MovableObject from "./../prefab/MovableObject";
+import config from "./../config";
 
-export class Fire extends MovableObject {
+class Fire extends MovableObject {
   static generate(scene, source) {
     const data = {
       scene,
@@ -17,3 +17,5 @@ export class Fire extends MovableObject {
     return this.x < -this.width || this.x > config.width + this.width;
   }
 }
+
+export default Fire;

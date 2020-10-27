@@ -1,8 +1,8 @@
 import Phaser from "phaser";
-import { Enemy } from "./enemy";
-import { Fires } from "./fires";
+import Enemy from "./../prefab/Enemy";
+import Fires from "./../prefab/Fires";
 
-export class Enemies extends Phaser.Physics.Arcade.Group {
+class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super(scene.physics.world, scene);
 
@@ -19,6 +19,9 @@ export class Enemies extends Phaser.Physics.Arcade.Group {
     });
   }
 
+  /**
+   *
+   */
   tick() {
     if (this.countCreated < this.countMax) {
       this.createEnemy();
@@ -27,6 +30,9 @@ export class Enemies extends Phaser.Physics.Arcade.Group {
     }
   }
 
+  /**
+   * killed enemy
+   */
   onEnemyKilled() {
     ++this.countKilled;
 
@@ -35,6 +41,9 @@ export class Enemies extends Phaser.Physics.Arcade.Group {
     }
   }
 
+  /**
+   * create enemy
+   */
   createEnemy() {
     let enemy = this.getFirstDead();
 
@@ -50,3 +59,5 @@ export class Enemies extends Phaser.Physics.Arcade.Group {
     ++this.countCreated;
   }
 }
+
+export default Enemies;
