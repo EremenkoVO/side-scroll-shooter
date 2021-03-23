@@ -7,12 +7,10 @@ COPY . .
 RUN yarn \
     && yarn run build
 
-FROM node:lts-alpine as final
+FROM moeryomenko/ngxjs:v0.0.2
 
-COPY --from=build /src/dist /dist
+COPY --from=build /src/dist /usr/share/nginx/html
 
-RUN npm install --global http-server
+EXPOSE 80
 
-EXPOSE 8080
-
-ENTRYPOINT [ "http-server", "/dist" ]
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
