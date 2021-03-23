@@ -1,6 +1,13 @@
 import Phaser from "phaser";
 import LoadingBar from "./../classes/LoadingBar";
-
+import dragonPNG from "./../assets/sprites/dragon.png";
+import dragonJSON from "./../assets/sprites/dragon.json";
+import enemyPNG from "./../assets/sprites/enemy.png";
+import enemyJSON from "./../assets/sprites/enemy.json";
+import boomPNG from "./../assets/sprites/boom.png";
+import boomJSON from "./../assets/sprites/boom.json";
+import firePNG from "./../assets/sprites/fire.png";
+import bullet from "./../assets/sprites/bullet.png";
 class PreloadScene extends Phaser.Scene {
   constructor() {
     super("Preload");
@@ -14,27 +21,11 @@ class PreloadScene extends Phaser.Scene {
 
   preloadAssets() {
     // images //
-    this.load.atlas(
-      "dragon",
-      "./assets/sprites/dragon.png",
-      "./assets/sprites/dragon.json",
-    );
-    this.load.atlas(
-      "enemy",
-      "./assets/sprites/enemy.png",
-      "./assets/sprites/enemy.json",
-    );
-    this.load.atlas(
-      "boom",
-      "./assets/sprites/boom.png",
-      "./assets/sprites/boom.json",
-    );
-    this.load.image("fire", "./assets/sprites/fire.png");
-    this.load.image("bullet", "./assets/sprites/bullet.png");
-
-    // sounds
-    this.load.audio("boom", "./assets/sounds/boom.mp3");
-    this.load.audio("theme", "./assets/sounds/theme.mp3");
+    this.load.atlas("dragon", dragonPNG, dragonJSON);
+    this.load.atlas("enemy", enemyPNG, enemyJSON);
+    this.load.atlas("boom", boomPNG, boomJSON);
+    this.load.image("fire", firePNG);
+    this.load.image("bullet", bullet);
   }
   create() {
     this.scene.start("Start");

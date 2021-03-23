@@ -13,6 +13,21 @@ module.exports = {
       title: "Production",
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        use: "file-loader",
+      },
+    ],
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
