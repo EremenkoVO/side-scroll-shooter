@@ -13,11 +13,17 @@
 Установка приложения
 
 ```sh
-yarn install
+$ yarn install
 ```
 
 Запуск приложения
 
 ```sh
-yarn dev
+$ yarn dev
+```
+
+Сборка и запуск контейнера с игрой
+```sh
+$ docker build . -t side-scroll-shooter:0.0.$version
+$ docker run -p 8080:8080 side-scroll-shooter:0.0.$version
 ```
