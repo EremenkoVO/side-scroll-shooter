@@ -1,7 +1,5 @@
 FROM node:lts-alpine as build
 
-RUN npm install --global http-server
-
 WORKDIR src
 
 COPY . .
@@ -9,6 +7,12 @@ COPY . .
 RUN yarn \
     && yarn run build
 
+FROM node:lts-alpine as final
+
+COPY --from=build /src/dist /dist
+
+RUN npm install --global http-server
+
 EXPOSE 8080
 
-CMD [ "http-server", "dist" ]
+ENTRYPOINT [ "http-server", "/dist" ]
