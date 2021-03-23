@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import background from "./../assets/sprites/background.png";
 
 class BootScene extends Phaser.Scene {
   constructor() {
@@ -9,7 +10,7 @@ class BootScene extends Phaser.Scene {
    */
   preload() {
     // images //
-    this.load.image("background", "./assets/sprites/background.png");
+    this.load.image("background", background);
   }
 
   /**
