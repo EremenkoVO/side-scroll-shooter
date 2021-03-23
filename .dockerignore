@@ -1,2 +1,4 @@
 .git
-yarn.lock
+.gitattributes
+LICENSE
+README.md
