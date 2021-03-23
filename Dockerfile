@@ -1,15 +1,18 @@
 FROM node:lts-alpine as build
 
-RUN apk add --no-cache git
+WORKDIR src
+
+COPY . .
+
+RUN yarn \
+    && yarn run build
+
+FROM node:lts-alpine as final
+
+COPY --from=build /src/dist /dist
 
 RUN npm install --global http-server
 
-WORKDIR src
-
-RUN git clone https://github.com/EremenkoVO/side-scroll-shooter.git . \
-    && yarn install \
-    && yarn run build
-
 EXPOSE 8080
 
-CMD [ "http-server", "dist" ]
+ENTRYPOINT [ "http-server", "/dist" ]
