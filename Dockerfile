@@ -6,7 +6,7 @@ WORKDIR src
 
 COPY . .
 
-RUN yarn install \
+RUN yarn \
     && yarn run build
 
 EXPOSE 8080
